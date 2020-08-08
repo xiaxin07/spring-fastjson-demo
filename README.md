@@ -1,0 +1,2 @@
+# spring-fastjson-demo
+spring配置fastjson消息转换器替代默认的jackson配置
