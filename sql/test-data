@@ -1,0 +1,15 @@
+ 测试fastjson序列化、反序列化: POST http://localhost/getUser
+
+ 请求参数：
+ {
+ "user_id":1
+ }
+
+
+ 响应：
+ {
+ "age": 27,
+ "create_date": "2020-08-20 17:52:46",
+ "name": "cuixiaqing",
+ "user_id": 1
+ }
