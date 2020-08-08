@@ -3,6 +3,7 @@ package com.xiaxin.controller;
 import com.xiaxin.annotation.ParamModel;
 import com.xiaxin.entity.Users;
 import com.xiaxin.mapper.UserMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 @RestController
+@Slf4j
 public class IndexController {
     @Autowired
     private UserMapper userMapper;
@@ -51,7 +53,7 @@ public class IndexController {
     public Users getUser(HttpServletRequest request, @RequestBody Users users) {
         Cookie[] cookies = request.getCookies();
         for (Cookie cookie : cookies) {
-            System.out.println(cookie.getName() + ":" + cookie.getValue());
+            log.info(cookie.getName() + ":" + cookie.getValue());
         }
         Users users1 = userMapper.getUser(users.getUserId()).get(0);
         System.out.println(users1);
@@ -65,9 +67,13 @@ public class IndexController {
      * @return
      */
     @GetMapping("/getUserById")
-    public Users getUserById(@ParamModel Users users) {
+    public Users getUserById(HttpServletRequest request, @ParamModel Users users) {
+        Cookie[] cookies = request.getCookies();
+        for (Cookie cookie : cookies) {
+            log.info("cookie:{}={}", cookie.getName(), cookie.getValue());
+        }
         Users user = userMapper.getUser(users.getUserId()).get(0);
-        System.out.println(user);
+        log.info("user={}", user);
         return user;
     }
 
