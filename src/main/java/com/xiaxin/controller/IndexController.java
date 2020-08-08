@@ -52,8 +52,10 @@ public class IndexController {
     @PostMapping("/getUser")
     public Users getUser(HttpServletRequest request, @RequestBody Users users) {
         Cookie[] cookies = request.getCookies();
-        for (Cookie cookie : cookies) {
-            log.info(cookie.getName() + ":" + cookie.getValue());
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                log.info(cookie.getName() + ":" + cookie.getValue());
+            }
         }
         Users users1 = userMapper.getUser(users.getUserId()).get(0);
         System.out.println(users1);
@@ -68,9 +70,12 @@ public class IndexController {
      */
     @GetMapping("/getUserById")
     public Users getUserById(HttpServletRequest request, @ParamModel Users users) {
+
         Cookie[] cookies = request.getCookies();
-        for (Cookie cookie : cookies) {
-            log.info("cookie:{}={}", cookie.getName(), cookie.getValue());
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                log.info("cookie:{}={}", cookie.getName(), cookie.getValue());
+            }
         }
         Users user = userMapper.getUser(users.getUserId()).get(0);
         log.info("user={}", user);
